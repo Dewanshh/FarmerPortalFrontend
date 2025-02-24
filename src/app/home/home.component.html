@@ -1,0 +1,26 @@
+<div class="h-full relative bg-gray-100">
+    <div class="h-[400px] flex items-center justify-center overflow-hidden  relative">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/India_Farming.jpg" class="object-cover w-full h-full" alt="Farmer Image"/>
+
+        <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
+
+        <p class="absolute text-4xl sm:text-5xl font-semibold text-white z-20 px-4 text-center">Welcome to Farmer Portal</p>
+    </div>
+
+    <div class="p-8 bg-white text-center">
+        <p class="text-2xl font-medium text-gray-700">Explore the Best Offers for You</p>
+        <p class="mt-2 text-gray-500 text-lg">Discover a range of opportunities tailored to the needs of farmers. Join us today!</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8">
+        <div *ngFor="let item of [1, 2, 3, 4]" class="bg-white rounded-lg shadow-xl transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
+            <div class="p-6">
+                <h3 class="text-2xl font-semibold text-center text-teal-600 mb-4">Item {{ item }}</h3>
+                <p class="text-gray-600 text-center">This is card number {{ item }}. Learn more about it below.</p>
+                <div class="text-center mt-4">
+                    <button class="bg-teal-500 text-white py-2 px-6 rounded-full shadow-md hover:bg-teal-600 transition duration-300" (click)="goToPage(item)">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
