@@ -1,13 +1,30 @@
 <div class="flex justify-between py-4 px-8 bg-teal-400 text-white">
-    <div class="">
+    <div>
         <h1 class="text-2xl font-semibold">Farmer Portal</h1>
     </div>
     <div>
-        <ul class="flex items-center text-xl space-x-4">
-            <li><button (click)="goToPage('')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Home</button></li>
-            <li><button (click)="goToPage('/ads')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Ads</button></li>
-            <li><button (click)="goToPage('/complaints')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Complaint Page</button></li>
-            <li><button (click)="goToPage('/login')"  class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Login</button></li>
+        <ul class="flex items-center text-xl gap-4">
+            <li>
+                <button (click)="goToPage('')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Home</button>
+            </li>
+            <li>
+                <button (click)="goToPage('/ads')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Ads</button>
+            </li>
+            <li>
+                <button (click)="goToPage('/complaints')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Complaint Page</button>
+            </li>
+            <li *ngIf="userId === ''">
+                <button (click)="goToPage('/login')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Login</button>
+            </li>
+            <li *ngIf="userId !== '' && userRole === 'Admin'">
+                <button (click)="goToPage('/admin')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Admin Panel</button>
+            </li>
+            <li *ngIf="userId !== '' && userRole === 'User'">
+                <button (click)="goToPage('/profile')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">User Profile</button>
+            </li>
+            <li *ngIf="userId !== '' && userRole === 'Dealer'">
+                <button (click)="goToPage('/dealer-panel')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Dealer Panel</button>
+            </li>
         </ul>
     </div>
 </div>

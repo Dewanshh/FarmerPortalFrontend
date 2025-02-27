@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComplaintService } from '../services/complaint.service';
-import { DatePipe, NgFor } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-complaintdetail',
   standalone: true,
-  imports: [NgFor,FormsModule], 
+  imports: [NgFor,FormsModule,NgIf], 
   templateUrl: './complaintdetail.component.html',
   styleUrl: './complaintdetail.component.css',
   providers:[DatePipe]
@@ -20,6 +20,9 @@ export class ComplaintdetailComponent {
     private complaintService: ComplaintService,
     private datePipe: DatePipe
   ) {}
+
+  userId: string | null = "";
+  userRole: string | null = ""; 
   newComment={
     comment:'',
     createdBy:'devanhs@gmail.com'
@@ -37,6 +40,8 @@ export class ComplaintdetailComponent {
       this.complaintId = +params['id'];
       console.log(this.complaintId);
     });
+    this.userId = localStorage.getItem("email");
+    this.userRole = localStorage.getItem("role");
 
     this.complaintService.getComplaintById(this.complaintId).subscribe(
       (response) => {
@@ -47,9 +52,11 @@ export class ComplaintdetailComponent {
       }
     );
   }
+  goToLogin() {
+    this.router.navigate(["/login"]);
+  }
   addComment(id:number){
-    console.log(id);
-    console.log(this.newComment);
+
     this.complaintService.addComment(id,this.newComment).subscribe((response)=>{console.log("Comment Added");},(error)=>{console.log(error);})
   }
 }
