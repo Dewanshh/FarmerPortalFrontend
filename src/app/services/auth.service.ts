@@ -12,6 +12,8 @@ export class AuthService {
 
   registerUrl = "http://localhost:5214/api/Auth/register";
   loginUrl = "http://localhost:5214/api/Auth/login";
+  getUserUrl = "http://localhost:5214/api/Auth/getuser";
+
 
 
   RegisterUser(user: any): Observable<any> {
@@ -20,5 +22,8 @@ export class AuthService {
 
   LoginUser(user: any): Observable<any> {
     return this.http.post<{ email: string; role: string }>(this.loginUrl, user);
+  }
+  GetUsers():Observable<any>{
+    return this.http.get(this.getUserUrl);
   }
 }

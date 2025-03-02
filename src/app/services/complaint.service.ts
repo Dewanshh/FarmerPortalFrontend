@@ -23,6 +23,10 @@ export class ComplaintService {
     return this.http.get<any>(this.addComplaintUrl+`/${id}`);
   }
 
+  closeComplaintById(id:number){
+    return this.http.put<any>(this.addComplaintUrl+`/close/${id}`,{});
+  }
+
   addComment(id:number,jsonBody:any){
     return this.http.post<any>(this.addComplaintUrl+`/comment/${id}`,jsonBody);
   }

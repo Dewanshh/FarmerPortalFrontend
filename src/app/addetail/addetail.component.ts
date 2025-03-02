@@ -19,7 +19,7 @@ export class AddetailComponent implements OnInit {
   userRole: string | null = "";
   newComment = {
     comment: '',
-    createdBy: 'dewansh',
+    createdBy: this.userId,
     createdAt: new Date().toISOString(),
   };
   constructor(private route:ActivatedRoute,private productService:ProductService,private datePipe: DatePipe,private router:Router){}
@@ -47,13 +47,22 @@ export class AddetailComponent implements OnInit {
   goToLogin() {
     this.router.navigate(["/login"]);
   }
+  deleteAd(id:number){
+    this.productService.deleteAd(id).subscribe((response)=>{
+      // alert("Delted Succesfully");
+      console.log(response);
+      this.router.navigate([""]);
+    },(err)=>{console.log(err);});
+  }
  addComment() {
    if(this.newComment.comment.trim()===''){
      alert("Please add Comment");
      return ;
    }else{
-    
-   this.productService.postCommetToProductById(this.itemId,this.newComment).subscribe((response)=>{},(error)=>{
+     this.newComment.createdBy=this.userId;
+     
+     this.productService.postCommetToProductById(this.itemId,this.newComment).subscribe((response)=>{},(error)=>{
+     console.log(this.newComment);
     alert(error);
    });
 

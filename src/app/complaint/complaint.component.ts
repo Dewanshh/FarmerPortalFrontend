@@ -16,7 +16,7 @@ export class ComplaintComponent implements OnInit {
   constructor(private router: Router,private route:ActivatedRoute,private complaintService: ComplaintService,private datePipe:DatePipe) {}
   complaintFormShow:boolean=false;
   complaints:any=[];
-
+  userId:string|null="";
   onChangeFormShow(){
     this.complaintFormShow=!this.complaintFormShow;
   }
@@ -27,6 +27,7 @@ export class ComplaintComponent implements OnInit {
       },(error)=>{
         console.log(error);
       })
+      this.userId=localStorage.getItem("email");
   }
   formatDate(dateTime:string){
     const dateObj=new Date(dateTime);
@@ -37,16 +38,20 @@ export class ComplaintComponent implements OnInit {
     ComplaintName:'',
     Description:'',
     ComplaintBy:'',
-    Comments:[]
+    Comments:[],
+    IsClosed:false,
   }
   onSubmit(){
+    this.newComplaint.ComplaintBy=this.userId??'Anoymous';
     this.complaintService.addComplaint(this.newComplaint).subscribe((response)=>{},(error)=>{
       console.log(error);
     })
     this.newComplaint.ComplaintName='';
     this.newComplaint.Description='';
     this.onChangeFormShow();  
+    window.location.reload();
   }
+  
   goToPage(complaintId:number){
     this.router.navigate([`complaints/${complaintId}`]);
   }

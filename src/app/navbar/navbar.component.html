@@ -7,13 +7,14 @@
             <li>
                 <button (click)="goToPage('')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Home</button>
             </li>
+           
             <li>
                 <button (click)="goToPage('/ads')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Ads</button>
             </li>
             <li>
                 <button (click)="goToPage('/complaints')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Complaint Page</button>
             </li>
-            <li *ngIf="userId === ''">
+            <li *ngIf="!userId">
                 <button (click)="goToPage('/login')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Login</button>
             </li>
             <li *ngIf="userId !== '' && userRole === 'Admin'">
@@ -22,9 +23,13 @@
             <li *ngIf="userId !== '' && userRole === 'User'">
                 <button (click)="goToPage('/profile')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">User Profile</button>
             </li>
+            <li>
+                <button (click)="goToPage('notifications')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Notifactions</button>
+                </li>
             <li *ngIf="userId !== '' && userRole === 'Dealer'">
                 <button (click)="goToPage('/dealer-panel')" class="text-white cursor-pointer hover:text-yellow-500 bg-transparent border-none">Dealer Panel</button>
             </li>
+
         </ul>
     </div>
 </div>

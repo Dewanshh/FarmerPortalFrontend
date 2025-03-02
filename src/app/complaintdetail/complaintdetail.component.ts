@@ -38,7 +38,7 @@ export class ComplaintdetailComponent {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.complaintId = +params['id'];
-      console.log(this.complaintId);
+      // console.log(this.complaintId);
     });
     this.userId = localStorage.getItem("email");
     this.userRole = localStorage.getItem("role");
@@ -55,8 +55,21 @@ export class ComplaintdetailComponent {
   goToLogin() {
     this.router.navigate(["/login"]);
   }
-  addComment(id:number){
-
-    this.complaintService.addComment(id,this.newComment).subscribe((response)=>{console.log("Comment Added");},(error)=>{console.log(error);})
+  closeComplaint(id:number){
+    this.complaintDetail.IsClosed=!this.complaintDetail.IsClosed;
+    this.complaintService.closeComplaintById(id).subscribe((response)=>{
+      // window.location.reload();
+      console.log(response);
+      this.complaintDetail=response.complaint;
+      
+      // console.log("Changed Succesfully");
+    },(err)=>{console.log(err)});
   }
+  addComment(id:number){
+    this.newComment.createdBy=this.userId??'Anoymous';
+    this.complaintService.addComment(id,this.newComment).subscribe((response)=>{console.log("Comment Added");    window.location.reload();
+;    },(error)=>{console.log(error);})
+
+  }
+  
 }

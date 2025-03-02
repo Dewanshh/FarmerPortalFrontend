@@ -22,10 +22,13 @@ export class LoginComponent {
         console.log("Login successful", response);
         alert("Logged in Successfully");
   
+        console.log(response.email);
         localStorage.setItem("email", response.email);
         localStorage.setItem("role", response.role);
+      
   
         this.router.navigate(['']);
+        // window.location.reload();
       },
       (err) => {
         console.error("Login failed", err);

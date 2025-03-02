@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotificationsService } from '../notifications.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,17 +11,15 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  userId: string = "";
-  userRole: string = "";
-
+  userId: string|undefined|null=undefined;
+  userRole: string |undefined|null= undefined;
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const x = localStorage.getItem("email") || "";
-    const role = localStorage.getItem("role") || "";
-
-    this.userId = x.trim();
-    this.userRole = role.trim();
+    const x = localStorage.getItem("email") ;
+    const role = localStorage.getItem("role") ;
+    this.userId = x;
+    this.userRole = role;
   }
 
   goToPage(path: string) {
